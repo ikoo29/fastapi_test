@@ -2,7 +2,7 @@ from databases import Database
 from fastapi import FastAPI
 
 # 데이터베이스 URL 설정
-DATABASE_URL = "postgresql://user:password@host:port/database_name"
+DATABASE_URL = "postgresql-test:5432"
 
 app = FastAPI()
 
