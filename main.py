@@ -39,8 +39,8 @@ async def list_tables():
     rows = await database.fetch_all(query)
     return {"tables": [row["table_name"] for row in rows]}
 
-@app.post("/add-contact/")
-async def add_contact(contact: Contact):
+@app.post("/add-contact")
+async def add_contact():
     query = """
     INSERT INTO "test-table" ("이름", "주소", "전화번호")
     VALUES ("박기자", "중동", "010-2959-1111");
