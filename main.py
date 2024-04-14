@@ -30,8 +30,16 @@ async def shutdown():
     # 데이터베이스 연결 해제
     await database.disconnect()
     
-@app.get("/databases")
-async def list_databases():
-    query = "SELECT datname FROM pg_database WHERE datistemplate = false;"
-    rows = await database.fetch_all(query)
-    return {"databases": [row["datname"] for row in rows]}
+@app.on_event("startup")
+async def startup():
+    await database.connect()
+
+@app.on_event("shutdown")
+async def shutdown():
+    await database.disconnect()
+
+@app.get("/data")
+async def fetch_data():
+    query = "SELECT * FROM your_table_name;"
+    result = await database.fetch_all(query)
+    return {"data": result}
