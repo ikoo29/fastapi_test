@@ -18,7 +18,7 @@ app = FastAPI()
 
 # Database 객체 생성
 database = Database(DATABASE_URL)
-    
+
 @app.on_event("startup")
 async def startup():
     await database.connect()
@@ -38,3 +38,12 @@ async def list_tables():
     query = "SELECT table_name FROM information_schema.tables WHERE table_schema='public'"
     rows = await database.fetch_all(query)
     return {"tables": [row["table_name"] for row in rows]}
+
+@app.post("/add-contact/")
+async def add_contact(contact: Contact):
+    query = """
+    INSERT INTO "test-table" ("이름", "주소", "전화번호")
+    VALUES ("박기자", "중동", "010-2959-1111");
+    """
+    await database.execute(query)
+    return {"status": "Contact added successfully", "contact": contact}
