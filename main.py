@@ -29,7 +29,7 @@ async def shutdown():
 
 @app.get("/data")
 async def fetch_data():
-    query = 'SELECT * FROM "test_table"'
+    query = 'SELECT * FROM "test-table"'
     result = await database.fetch_all(query)
     return {"data": result}
 
