@@ -43,7 +43,7 @@ async def list_tables():
 async def add_contact():
     query = """
     INSERT INTO "test-table" ("이름", "주소", "전화번호")
-    VALUES ("박기자", "중동", "010-2959-1111");
+    VALUES ('박기자', '중동', '010-2959-1111');
     """
     await database.execute(query)
     return {"status": "Contact added successfully"}
