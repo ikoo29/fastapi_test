@@ -46,4 +46,4 @@ async def add_contact(contact: Contact):
     VALUES ("박기자", "중동", "010-2959-1111");
     """
     await database.execute(query)
-    return {"status": "Contact added successfully", "contact": contact}
+    return {"status": "Contact added successfully"}
