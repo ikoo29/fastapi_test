@@ -32,3 +32,9 @@ async def fetch_data():
     query = 'SELECT * FROM "test_table"'
     result = await database.fetch_all(query)
     return {"data": result}
+
+@app.get("/tables")
+async def list_tables():
+    query = "SELECT table_name FROM information_schema.tables WHERE table_schema='public'"
+    rows = await database.fetch_all(query)
+    return {"tables": [row["table_name"] for row in rows]}
